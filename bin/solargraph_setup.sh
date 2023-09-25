@@ -26,9 +26,6 @@ code --install-extension castwide.solargraph
 echo '\n================ installing solargraph gem ================\n'
 gem install solargraph
 
-echo '\n================ installing Ruby docs ================\n'
-solargraph download-core
-
 if [ ! -f .solargraph.yml ]; then
   echo '\n================ adding .solargraph.yml ================\n'
   touch .solargraph.yml
@@ -43,9 +40,6 @@ yard gems
 echo '\n================ setting gem docs to auto-install ================\n'
 yard config --gem-install-yri
 
-echo '\n================ generating Rails gem docs ================\n'
-solargraph bundle
-
 if [ ! -f config/definitions.rb ]; then
   echo '\n================ adding config/definitions.rb ================\n'
   touch config/definitions.rb
@@ -54,7 +48,7 @@ if [ ! -f config/definitions.rb ]; then
   echo "${html}" > config/definitions.rb
 fi
 
-echo '\n================ checking for NPM ================\n'
+echo '\n================ installing NPM ================\n'
 NPM_INSTALLED=$(command asdf plugin list all | grep -c npm)
 if [ $NPM_INSTALLED -gt 0 ]; then
   printf "npm plugin for asdf is already added!\n"
@@ -73,7 +67,7 @@ fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   # macOS
-    settings_path="$HOME/Library/Application Support/Code/User/settings.json"
+  settings_path="$HOME/Library/Application Support/Code/User/settings.json"
 elif [[ "$OSTYPE" == "msys" ]]; then
   # Windows
   settings_path="%APPDATA%\Code\User\settings.json"
